@@ -24,15 +24,13 @@
       "esri/widgets/ScaleBar",
       "esri/widgets/Legend",
 	  "esri/widgets/LayerList",
-
-    ], function(esriConfig, Map, MapView, FeatureLayer, ScaleBar, Legend, LayerList) {
+	  "esri/widgets/Expand"
+    ], function(esriConfig, Map, MapView, FeatureLayer, ScaleBar, Legend, LayerList, Expand) {
 	
 	  esriConfig.apiKey = "AAPK563647cc6d0d4359b524c8e78537e87fXNsVKRBVmxFq1CtsilGtSJsM5LmFLxB7SUqSwZOSS_eo175yS7MF3OcNqaLQm8Lt";
-
       const map = new Map({
         basemap: "streets"
       });
-
       const view = new MapView({
         container: "viewDiv",
         map: map,
@@ -55,17 +53,27 @@
       const layerList = new LayerList({
 		view: view
       });
-	  view.ui.add(layerList, "bottom-right");
+	  layerListExpand = new Expand({
+		expandIconClass: "esri-icon-layer-list",
+		view: view,
+		content: layerList
+	  });
+	  view.ui.add(layerListExpand, "bottom-right");
        
       const scalebar = new ScaleBar({
         view: view
       });
       view.ui.add(scalebar, "bottom-left");
-
       const legend = new Legend ({
         view: view
       });
-      view.ui.add(legend, "top-right");	  
+      legendExpand = new Expand({
+		expandIconClass: "esri-icon-legend",
+		view: view,
+		content: legend
+	  });
+	  view.ui.add(legendExpand, "top-right");
+	  
 	});
   </script>
 </head>
